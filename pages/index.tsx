@@ -1,8 +1,21 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import styles from '../styles/Home.module.css'
+import sendMail from '../emails'
+import AccountCreated from '../emails/AccountCreated'
 
 export default function Home() {
+  useEffect(() => {
+    sendMail({
+      subject: 'My First Email',
+      to: 'tester@example.com',
+      cc: 'tester+cc@example.com',
+      bcc: ['tester+bcc@example.com', 'tester+bcc2@example.com'],
+      component: <AccountCreated name="Amelita" />,
+    })
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
